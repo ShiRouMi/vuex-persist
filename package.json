@@ -1,0 +1,10 @@
+{
+  "name": "vuex-persist",
+  "version": "1.0.0",
+  "description": "vuex persist state",
+  "main": "index.js",
+  "repository": "https://github.com/ShiRouMi/vuex-persist.git",
+  "author": "shiroumi",
+  "license": "MIT",
+  "private": true
+}
