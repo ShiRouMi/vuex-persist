@@ -1,5 +1,6 @@
 
 # vuex-storage-state
+[![NPM](https://nodei.co/npm/vuex-storage-state.png)](https://nodei.co/npm/vuex-storage-state/)
 
 Vuex 状态持久化插件
 
