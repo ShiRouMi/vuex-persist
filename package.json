@@ -1,10 +1,10 @@
 {
-  "name": "vuex-persist",
-  "version": "1.0.0",
+  "name": "vuex-storage-state",
+  "version": "1.0.2",
   "description": "vuex persist state",
-  "main": "index.js",
-  "repository": "https://github.com/ShiRouMi/vuex-persist.git",
+  "main": "src/index.js",
+  "repository": "https://github.com/ShiRouMi/vuex-storage-state.git",
   "author": "shiroumi",
   "license": "MIT",
-  "private": true
+  "private": false
 }

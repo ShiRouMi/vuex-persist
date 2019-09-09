@@ -38,3 +38,7 @@ VuexPersist.remove()
 // 参数是数组类型
 VuexPersist.observer(array)
 ```
+
+## TODO
+- 当使用到 Module，目前只能存储某个模块的所有状态，对于仅存储某个模块的某个 state 还没有做区分
+- 过滤情况应该分为存储某些状态，或者是不存储某些状态
