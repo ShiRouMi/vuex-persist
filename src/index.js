@@ -1,5 +1,6 @@
 const LS = window.localStorage
 const KEY = "vuex-persist"
+let Observer = null
 
 const getStorage = key => {
   if (!key) return false
@@ -27,10 +28,24 @@ const storagePlugins = store => {
   initState(store)
 
   store.subscribe((mutation, state) => {
-    setStorage(KEY, state)
+
+    let observerState = {}
+    if (Observer) {
+      for (let item of Observer) {
+        observerState[item] = state[item]
+      }
+    } else {
+      observerState = state
+    }
+    setStorage(KEY, observerState)
+
   })
 }
 
-storagePlugins.remove = removeStorage
+const setObserver = array => {
+  Observer = array
+}
 
+storagePlugins.remove = () => removeStorage(KEY)
+storagePlugins.observer = setObserver
 export default storagePlugins

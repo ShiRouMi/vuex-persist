@@ -10,7 +10,7 @@ Vuex 是一个状态管理器，有一个缺点是：在刷新页面后，Vuex �
 配合 HTML5 本地存储方案 localStorage 或者 sessionStorage 进行存储，但是有一些情况需要考虑：
 
 - 并不是所有的状态都需要放入本地存储
-- 状态默认值，重置状态默认值，默认值不一，''、0、false 各种类型（defaultState)
+- 状态默认值，重置状态默认值，默认值不一，''、0、false 各种类型（defaultState) ---- 初始备份 state
 - safari 无痕模式 localstorage, sessionStorage 会被禁用
 - 有的数据要存 localstorage，有的要存 sessionStorage?
 
@@ -30,5 +30,11 @@ const store = new Vuex.Store({
 
 ### 清除 storage
 ```js
-remove()
+VuexPersist.remove()
+```
+
+### 添加观察者，默认观察所有
+```js
+// 参数是数组类型
+VuexPersist.observer(array)
 ```
