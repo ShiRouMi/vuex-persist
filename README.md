@@ -1,5 +1,5 @@
 
-# vuex-persist
+# vuex-storage-state
 
 Vuex 状态持久化插件
 
@@ -19,24 +19,24 @@ Vuex 是一个状态管理器，有一个缺点是：在刷新页面后，Vuex �
 ## Use
 ```js
 // import 导入
-import VuexPersist from 'vuex-persist'
+import VuexStorageState from 'vuex-storage-state'
 
 // 添加到 store
 const store = new Vuex.Store({
   // ...
-  plugins: [VuexPersist]
+  plugins: [VuexStorageState]
 })
 ```
 
 ### 清除 storage
 ```js
-VuexPersist.remove()
+VuexStorageState.remove()
 ```
 
 ### 添加观察者，默认观察所有
 ```js
 // 参数是数组类型
-VuexPersist.observer(array)
+VuexStorageState.observer(array)
 ```
 
 ## TODO
