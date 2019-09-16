@@ -38,10 +38,15 @@ const store = new Vuex.Store({
 VuexStorageState.remove()
 ```
 
-### 添加观察者，默认观察所有
+### 添加观察者，默认保存所有 state
 ```js
-// 参数是数组类型
-VuexStorageState.observer(array)
+/* array 是数组类型
+   sign 是布尔类型
+   sign: true 时候 array 是被保存的 state
+   sign: false 时候 array 是不被保存的 state
+*/
+
+VuexStorageState.observer(array, sign)
 ```
 
 ## TODO
