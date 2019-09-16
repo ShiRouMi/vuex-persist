@@ -1,6 +1,7 @@
 const LS = window.localStorage
 const KEY = "vuex-persist"
 let Observer = null
+let isObserve = true
 
 const getStorage = key => {
   if (!key) return false
@@ -28,22 +29,32 @@ const storagePlugins = store => {
   initState(store)
 
   store.subscribe((mutation, state) => {
-
     let observerState = {}
     if (Observer) {
-      for (let item of Observer) {
-        observerState[item] = state[item]
+      if (isObserve) {
+        for (let item of Observer) {
+          observerState[item] = state[item]
+        }
+      } else {
+        for (let item in state) {
+          if (!Observer.includes(item)) {
+            observerState[item] = state[item]
+          }
+        }
       }
     } else {
       observerState = state
     }
     setStorage(KEY, observerState)
-
   })
 }
 
-const setObserver = array => {
+/* sign: true 时候 array 是被观察的对象
+  sign: false 时候 array 是不被观察的对象
+*/
+const setObserver = (array, sign = true) => {
   Observer = array
+  isObserve = sign
 }
 
 storagePlugins.remove = () => removeStorage(KEY)
