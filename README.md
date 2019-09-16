@@ -17,6 +17,10 @@ Vuex 是一个状态管理器，有一个缺点是：在刷新页面后，Vuex �
 
 本插件用于自动保存和还原 Vuex 状态，使得刷新页面后，Vuex 状态不变。
 
+## Requirements
+- Vue.js (v2.0.0+)
+- Vuex (v2.0.0+)
+
 ## Use
 ```js
 // import 导入
@@ -43,3 +47,4 @@ VuexStorageState.observer(array)
 ## TODO
 - 当使用到 Module，目前只能存储某个模块的所有状态，对于仅存储某个模块的某个 state 还没有做区分
 - 过滤情况应该分为存储某些状态，或者是不存储某些状态
+- ts 版本 
