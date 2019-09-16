@@ -1,10 +1,16 @@
 {
   "name": "vuex-storage-state",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "vuex persist state",
   "main": "src/index.js",
   "repository": "https://github.com/ShiRouMi/vuex-storage-state.git",
   "author": "shiroumi",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "build": "yarn build:demo",
+    "build:demo": "cd ./demo && yarn && yarn build",
+    "dev:demo": "cd ./demo && yarn serve",
+    "run:demo": "cd ./demo && yarn && yarn serve"
+  }
 }
