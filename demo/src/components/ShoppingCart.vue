@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-cart">
     <ul>
-      <li v-for="cart in carts">
+      <li v-for="cart in carts" :key="cart.title">
         {{cart.title}} --- {{cart.price}} * {{cart.count}}
       </li>
     </ul>
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import plugins from '../store/plugins'
 export default {
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="product in products">
+    <li v-for="product in products" :key="product.title">
       {{product.title}}
       -
       {{product.price}}
@@ -10,7 +10,7 @@
   </ul>
 </template>
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   computed: mapState('products', {
     products: state => state.products

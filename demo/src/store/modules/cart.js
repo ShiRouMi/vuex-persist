@@ -1,12 +1,3 @@
-import { 
-  CART_STORAGE,
-  IS_CHECKOUT,
-  getStorage,
-  setStorage,
-  removeStorage
-} from '../storage'
-import plugins from '../plugins'
-
 const state = {
   cart: [],
   isCheckout: false
