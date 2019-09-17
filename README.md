@@ -39,7 +39,15 @@ import VuexStorageState from 'vuex-storage-state'
 // 添加到 store
 const store = new Vuex.Store({
   // ...
-  plugins: [VuexStorageState]
+  plugins: [
+    VuexStorageState({
+      name: 'vuex-storage-state',
+      observer: {
+        list: ['xxx'],
+        sign: true
+      }
+    })
+  ]
 })
 ```
 
@@ -48,17 +56,6 @@ const store = new Vuex.Store({
 VuexStorageState.remove()
 ```
 
-### 添加观察者，默认保存所有 state
-```js
-/* array 是数组类型
-   sign 是布尔类型
-   sign: true 时候 array 是被保存的 state
-   sign: false 时候 array 是不被保存的 state
-*/
-
-VuexStorageState.observer(array, sign)
-```
-
 ## TODO
 - 当使用到 Module，目前只能存储某个模块的所有状态，对于仅存储某个模块的某个 state 还没有做区分
-- ts 版本 
+

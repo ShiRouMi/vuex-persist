@@ -14,7 +14,7 @@
 </template>
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import plugins from '../store/plugins'
+import plugins from 'vuex-storage-state'
 export default {
   computed: {
     ...mapState('cart', {

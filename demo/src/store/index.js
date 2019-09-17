@@ -1,18 +1,24 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import products from './modules/products'
-import cart from './modules/cart'
-import plugins from 'vuex-storage-state'
-// import plugins from './plugins'
+import Vue from "vue"
+import Vuex from "vuex"
+import products from "./modules/products"
+import cart from "./modules/cart"
+import createVuexStorageState from "vuex-storage-state"
+// import createVuexStorageState from "../../../lib/index"
 Vue.use(Vuex)
 
-plugins.observer(['cart'], true)
 const store = new Vuex.Store({
   modules: {
     products,
     cart
   },
-  plugins: [plugins]
+  plugins: [
+    createVuexStorageState({
+      name: "ooo-state",
+      observer: {
+        list: ["cart"]
+      }
+    })
+  ]
 })
 
 export default store

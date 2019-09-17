@@ -41,7 +41,7 @@ const actions = {
     // removeStorage(CART_STORAGE)
   },
 
-  addToCart({ commit, state, rootState }, payload) {
+  addToCart({ commit, state }, payload) {
     commit('setCheckoutStatus', false)
     let cartItem = state.cart.find(item => item.title === payload.title)
     if(!cartItem) {
