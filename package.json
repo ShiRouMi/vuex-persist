@@ -1,6 +1,6 @@
 {
   "name": "vuex-storage-state",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "vuex persist state",
   "main": "lib/index.js",
   "repository": "https://github.com/ShiRouMi/vuex-storage-state.git",

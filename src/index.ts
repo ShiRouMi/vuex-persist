@@ -36,42 +36,60 @@ const removeStorage: (key: string) => any = (key: string): any => {
   LS.removeItem(key)
 }
 
-const initState:(store: Store, key: string) => void = (store: Store, key: string): void => {
-  let data = getStorage(key),
-    mergeData = (<any>Object).assign(store.state, data)
-  data && store.replaceState(mergeData)
-}
+class VuexStorageState {
+  constructor({ name = KEY, observer }: VuexStorageState) {
+    this.name = name
+    this.observer = observer
 
-const storagePlugins = (options: VuexStorageState) => {
+    window
+      ? window.removeVuexStorageState = ():void => {
+          this.remove()
+        }
+      : undefined
+  }
 
-  let { name=KEY, observer } = options
-  let { list, sign=true } = observer
-  KEY = name
+  initState(store: Store): void {
+    let data = getStorage(this.name),
+      mergeData = (<any>Object).assign(store.state, data)
+    data && store.replaceState(mergeData)
+  }
 
-  return (store: Store) => {
-    initState(store, name)
-
-    store.subscribe((mutation: any, state: any) => {
-      let observerState: any = {}
-      if (list) {
-        if (sign) {
-          for (let item of list) {
-            observerState[item] = state[item]
-          }
-        } else {
-          for (let item in state) {
-            if (!(<any>list).includes(item)) {
-              observerState[item] = state[item]
-            }
-          }
+  storageState(state: any):void {
+    let observerState: any = {}
+    let { list, sign = true } = this.observer
+    if (list) {
+      if (sign) {
+        for (let item of list) {
+          observerState[item] = state[item]
         }
       } else {
-        observerState = state
+        for (let item in state) {
+          if (!(<any>list).includes(item)) {
+            observerState[item] = state[item]
+          }
+        }
       }
-      setStorage(name, observerState)
+    } else {
+      observerState = state
+    }
+    setStorage(this.name, observerState)
+  }
+
+  remove(): void {
+    removeStorage(this.name)
+  }
+}
+const storagePlugins = (options: VuexStorageState) => {
+
+  let vuexStorageState = new VuexStorageState(options)
+
+  return (store: Store): void => {
+    vuexStorageState.initState(store)
+
+    store.subscribe((mutation, state) => {
+      vuexStorageState.storageState(state)
     })
   }
 }
 
-storagePlugins.remove = () => removeStorage(KEY)
 export default storagePlugins

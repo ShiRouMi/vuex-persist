@@ -13,8 +13,11 @@ interface VuexStorageState {
     name: string;
     observer: observerOptions;
 }
-declare const storagePlugins: {
-    (options: VuexStorageState): (store: Store) => void;
-    remove(): any;
-};
+declare class VuexStorageState {
+    constructor({ name, observer }: VuexStorageState);
+    initState(store: Store): void;
+    storageState(state: any): void;
+    remove(): void;
+}
+declare const storagePlugins: (options: VuexStorageState) => (store: Store) => void;
 export default storagePlugins;

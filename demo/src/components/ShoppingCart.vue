@@ -14,7 +14,6 @@
 </template>
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import plugins from 'vuex-storage-state'
 export default {
   computed: {
     ...mapState('cart', {
@@ -26,7 +25,7 @@ export default {
   methods: {
     ...mapActions('cart', ['cartCheckout']),
     clearStorage() {
-      plugins.remove()
+      window.removeVuexStorageState()
     }
   },
 }

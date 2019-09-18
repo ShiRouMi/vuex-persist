@@ -53,7 +53,7 @@ const store = new Vuex.Store({
 
 ### 清除 storage
 ```js
-VuexStorageState.remove()
+window.removeVuexStorageState()
 ```
 
 ## TODO

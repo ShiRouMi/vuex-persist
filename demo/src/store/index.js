@@ -3,7 +3,7 @@ import Vuex from "vuex"
 import products from "./modules/products"
 import cart from "./modules/cart"
 import createVuexStorageState from "vuex-storage-state"
-// import createVuexStorageState from "../../../lib/index"
+// import createVuexStorageState from "./plugin2"
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
