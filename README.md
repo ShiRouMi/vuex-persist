@@ -13,7 +13,6 @@ Vuex 是一个状态管理器，有一个缺点是：在刷新页面后，Vuex �
 - 并不是所有的状态都需要放入本地存储
 - 状态默认值，重置状态默认值，默认值不一，''、0、false 各种类型（defaultState) ---- 初始备份 state
 - safari 无痕模式 localstorage, sessionStorage 会被禁用
-- 有的数据要存 localstorage，有的要存 sessionStorage?
 
 本插件用于自动保存和还原 Vuex 状态，使得刷新页面后，Vuex 状态不变。
 
@@ -28,7 +27,7 @@ http://fefeng.cn/vuex-storage-state/
 ```js
 npm install vuex-storage-state --save
 
-yarn add vuex-storage-state
+yarn add vuex-storage-state - D
 ```
 
 ## Use
@@ -40,11 +39,28 @@ import VuexStorageState from 'vuex-storage-state'
 const store = new Vuex.Store({
   // ...
   plugins: [
+    VuexStorageState() // 默认存储所有状态
+  ]
+})
+```
+
+## API
+`createPersistedState([options])`
+- name: string
+- list: Array 数组的每一项是监听的
+
+```js
+const store = new Vuex.Store({
+  // ...
+  plugins: [
     VuexStorageState({
       name: 'vuex-storage-state',
       observer: {
-        list: ['xxx'],
-        sign: true
+        list: ['cart'], // 存储 cart 模块
+        isFilter: true // 默认 false, 如果设为 true，那么为过滤 cart 模块
+      },
+      observer: {
+        list: ['cart.isCheckout'] // 存储 cart 模块下的 isCheckout 状态
       }
     })
   ]
@@ -55,7 +71,3 @@ const store = new Vuex.Store({
 ```js
 window.removeVuexStorageState()
 ```
-
-## TODO
-- 当使用到 Module，目前只能存储某个模块的所有状态，对于仅存储某个模块的某个 state 还没有做区分
-

@@ -1,3 +1,4 @@
+import { omit, pick, cloneDeep } from 'lodash'
 const LS = window.localStorage;
 let KEY = "vuex-storage-state";
 const getStorage = (key) => {
@@ -18,7 +19,7 @@ const removeStorage = (key) => {
     LS.removeItem(key);
 };
 class VuexStorageState {
-    constructor({ name = KEY, observer }) {
+    constructor({ name = KEY, observer = {} }) {
         this.name = name;
         this.observer = observer;
         window
@@ -28,36 +29,27 @@ class VuexStorageState {
             : undefined;
     }
     initState(store) {
-        let data = getStorage(this.name), mergeData = Object.assign(store.state, data);
+        let data = getStorage(this.name), 
+            mergeData = Object.assign(store.state, data);
         data && store.replaceState(mergeData);
     }
     storageState(state) {
-        let observerState = {};
-        let { list, sign = true } = this.observer;
-        if (list) {
-            if (sign) {
-                for (let item of list) {
-                    observerState[item] = state[item];
-                }
-            }
-            else {
-                for (let item in state) {
-                    if (!list.includes(item)) {
-                        observerState[item] = state[item];
-                    }
-                }
-            }
+        let observerState = cloneDeep(state);
+        let { list, isFilter=false } = this.observer;
+        
+        if(list && list.length) {
+            observerState = !isFilter 
+            ? pick(observerState, list) 
+            : omit(observerState, list)
         }
-        else {
-            observerState = state;
-        }
+
         setStorage(this.name, observerState);
     }
     remove() {
         removeStorage(this.name);
     }
 }
-const storagePlugins = (options) => {
+const storagePlugins = (options = {}) => {
     let vuexStorageState = new VuexStorageState(options);
     return (store) => {
         vuexStorageState.initState(store);
